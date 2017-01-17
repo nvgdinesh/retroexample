@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ApiInterface firstreq=ApiService.reqService(ApiInterface.class);
-                Call<SimpleParser> callservice=firstreq.getResponse();
+                Call<SimpleParser> callservice=firstreq.getResponse("M4444085","test4bm");
                 callservice.enqueue(new Callback<SimpleParser>() {
                     @Override
                     public void onResponse(Call<SimpleParser> call, Response<SimpleParser> response) {
@@ -36,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
                             SimpleParser sp=response.body();
                             Log.e("MainActivity", "The Status is "+sp.RESPONSECODE);
                             Log.e("MainActivity", "The Status is "+sp.ERRCODE);
+                           if(sp.RESPONSECODE==1 && sp.ERRCODE==0)
+                               result.setText("Connected Login API");
 
                         }catch (Exception e){}
                     }
